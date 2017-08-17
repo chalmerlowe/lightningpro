@@ -17,7 +17,7 @@ Key features should include a website with the following capabilities
     * notify speakers via email
 * display page
     * show the order of the selected talks
-* timer page
+* timer page (reminiscent of [http://hackandtell.org/timer/](http://hackandtell.org/timer/)
     * display the time remaining
     * change the color of the timer from green (at 5:00) to red (at 0:00)
     * blink the timer at 10 seconds

@@ -10,7 +10,10 @@ Key features should include a website with the following capabilities:
     * input ~140 character title and description (single text input field)
     * input name (text input field)
     * input email address (text input field)
-    * input scheduling preference via dropdown (I have no preference | I prefer to go early during the session | I prefer to go late in the session)
+    * input scheduling preference via dropdown (such as the following):
+        * I prefer to go early during the session
+        * I prefer to go late in the session
+        * I have no preference
     * ability to cancel
 * admin page
     * mark talks as accepted, waitlisted, rejected

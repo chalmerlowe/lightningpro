@@ -32,8 +32,8 @@ Key features should include a website with the following capabilities:
     * blink the timer at 10 seconds
 * branding
     * LightningPro will need the capability to highlight two logos/brands
-          * logo one: the logo of the organization using the tool
-          * logo two: the LightningPro logo
+         * logo one: the logo of the organization using the tool
+         * logo two: the LightningPro logo
     * Modifying the organization logo should be straightforward 
 * user interface design
     * the user interface design should be straightforward, intuitive and easy to use without complicated instructions

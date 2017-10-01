@@ -1,3 +1,17 @@
+# Run the basic skeleton locally with django 1.11
+* clone the repo
+* make a local db by running
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+* start the server with
+```
+python3 manage.py runserver
+```
+* go to the link the development server is running on
+* test it
+
 # lightningpro
 Lightning Talk management tool
 

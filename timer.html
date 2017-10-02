@@ -1,114 +1,119 @@
 <html>
     <head>
-    <style>
-        #timer
-        {
-            color:green; 
-            font-size:33em;
-            font-family: sans-serif;
-            margin: auto 0;
-        }
-        body {
-            /* font-size: 62.5%;*/
-            background: #ffffff;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+        <style>
+            #timer
+            {
+                color:green; 
+                font-size:33em;
+                font-family: sans-serif;
+                margin: auto 0;
             }
-        button
-        {
-            font-size: 30px;
-            
-        }
+            body {
+                /* font-size: 62.5%;*/
+                background: #ffffff;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+            button
+            {
+                font-size: 30px;
 
-    </style>
-    
-    
+            }
+
+        </style>
+
+
     </head>
     <body>
         <div id="timer" style=""></div>
-    <button id="reset" onclick="reset();">RESET</button>
+        <button id="reset" onclick="reset();">RESET</button>
     </body>
 
 
     <script>
-        
-        
-        
-        
+
+
+
+
         document.getElementById('timer').innerHTML =
-            05+ ":" + 0+0;
-        
-        
-        
+            01+ ":" + 0+0;
+
+
+
         function getData_callback(res) {
-    var result = res.value;
-    if (result == 1) {
-        isWtngEnable = true;
-        blinkDIVOn();
-    }
-    else {
-        isWtngEnable = false;
-        clearTimeout(timer);
-        document.getElementById("timer").style.color = "white";
-    }
-}
- 
-function blinkDIVOn() {
-    if (timer) clearTimeout(timer);
- 
-    document.getElementById("timer").style.color = "red"
-    timer = setTimeout("blinkDIVOff()", 500);
-}
- 
-function blinkDIVOff() {
-    if (timer) clearTimeout(timer);
- 
-    document.getElementById("timer").style.color = "white";
-    timer = setTimeout("blinkDIVOn()", 500);
-}
-        
-        
-        
-        
+            var result = res.value;
+            if (result == 1) {
+                isWtngEnable = true;
+                blinkDIVOn();
+            }
+            else {
+                isWtngEnable = false;
+                clearTimeout(timer);
+                document.getElementById("timer").style.color = "white";
+            }
+        }
+
+        function blinkDIVOn() {
+            if (timer) clearTimeout(timer);
+
+            document.getElementById("timer").style.color = "red"
+            timer = setTimeout("blinkDIVOff()", 500);
+        }
+
+        function blinkDIVOff() {
+            if (timer) clearTimeout(timer);
+
+            document.getElementById("timer").style.color = "white";
+            timer = setTimeout("blinkDIVOn()", 500);
+        }
+
         var k,ta;
-        
+
         function startTimer() {
             k=1;
             var presentTime = document.getElementById('timer').innerHTML;
             var timeArray = presentTime.split(/[:]+/);
             var m = timeArray[0];
             var s = checkSecond((timeArray[1] - 1));
+
             if(s==59){m=m-1}
-            if(m==0&&s<30){
+
+            if(m==0&&s<30)
+            {
                 document.getElementById("timer").style.color = "red";
             }
-            if(m<5&&m>=2){
+            if(m<=5&&m>=2)
+            {
                 document.getElementById("timer").style.color = "green";
             }
             if(m<2&&m>=1)
-                {
-                    document.getElementById("timer").style.color = "yellow";
-                }
+            {
+                document.getElementById("timer").style.color = "yellow";
+            }
             if(m==0&&s>=30)
-                {
-                    document.getElementById("timer").style.color = "orange";
-                }
-            
-            if(m<0){alert('Timer Completed')
-            presentTime="00:00";
-                    return;
-                   }
+            {
+                document.getElementById("timer").style.color = "orange";
+            }
+
+            if(m<0)
+            {
+                alert('Timer Completed')
+                presentTime="0:00";
+                
+                return;
+            }
+
             if(m==0 && s<=10)
             {
                 getData_callback({value:1});
             }
-            
+
             document.getElementById('timer').innerHTML =
                 m + ":" + s;
             t=setTimeout(startTimer, 1000);
         }
-        
+
         document.getElementById('timer').addEventListener("click",function(){
             if(k)
             {
@@ -119,25 +124,42 @@ function blinkDIVOff() {
             else
             {
                 startTimer();
-//             if(m>0)
-//                 document.getElementById("timer").style.color = "yellow";
-//             else
-//                 document.getElementById("timer").style.color = "red";
+                //              if(m>0)
+                //                 document.getElementById("timer").style.color = "yellow";
+                //              else
+                //                 document.getElementById("timer").style.color = "red";
             }
         });  
-        
+
         function reset() 
         {
-                document.getElementById('timer').innerHTML =
+            if(document.getElementById('timer').innerHTML=="0:00")
+                {
+                clearTimeout(timer);
+            document.getElementById('timer').innerHTML =
                 05+ ":" + 0+0;
+                startTimer();
+                }
+            else
+                {
+                    document.getElementById('timer').innerHTML =
+                05+ ":" + 0+0;
+
+                }
+                
         }
-        
-        document.getElementById('timer').addEventListener("dblclick", reset);
-        
+
+        document.getElementById('timer').addEventListener("dblclick", function()
+                                                          {
+            document.getElementById('timer').innerHTML =
+                05+ ":" + 0+0;
+        });
+
         function checkSecond(sec) {
             if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
             if (sec < 0) {sec = "59"};
             return sec;
         }
+
     </script>
 </html>

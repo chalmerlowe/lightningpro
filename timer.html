@@ -1,26 +1,78 @@
 <html>
+    <head>
+    <style>
+        #timer
+        {
+            color:green; 
+            font-size:33em;
+            font-family: sans-serif;
+            margin: auto 0;
+        }
+        body {
+            /* font-size: 62.5%;*/
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            }
+        button
+        {
+            font-size: 30px;
+            
+        }
 
+    </style>
+    
+    
+    </head>
     <body>
-        <div id="timer" style="color:green; font-size:10em;width:200px;height:200px;"></div>
+        <div id="timer" style=""></div>
+    <button id="reset" onclick="reset();">RESET</button>
     </body>
 
 
     <script>
         
+        
+        
+        
         document.getElementById('timer').innerHTML =
-            05+ ":" + 00;
+            05+ ":" + 0+0;
+        
+        
+        
+        function getData_callback(res) {
+    var result = res.value;
+    if (result == 1) {
+        isWtngEnable = true;
+        blinkDIVOn();
+    }
+    else {
+        isWtngEnable = false;
+        clearTimeout(timer);
+        document.getElementById("timer").style.color = "white";
+    }
+}
+ 
+function blinkDIVOn() {
+    if (timer) clearTimeout(timer);
+ 
+    document.getElementById("timer").style.color = "red"
+    timer = setTimeout("blinkDIVOff()", 500);
+}
+ 
+function blinkDIVOff() {
+    if (timer) clearTimeout(timer);
+ 
+    document.getElementById("timer").style.color = "white";
+    timer = setTimeout("blinkDIVOn()", 500);
+}
+        
+        
+        
         
         var k,ta;
-
-        function blink() {
-            var blink_speed = 500; // every 1000 == 1 second, adjust to suit
-            ta = setInterval(function () {
-                var ele = document.getElementById('timer');
-                ele.style.visibility = (ele.style.visibility == 'hidden' ? '' : 'hidden');
-            }, blink_speed);
-
-        }
-
+        
         function startTimer() {
             k=1;
             var presentTime = document.getElementById('timer').innerHTML;
@@ -28,68 +80,64 @@
             var m = timeArray[0];
             var s = checkSecond((timeArray[1] - 1));
             if(s==59){m=m-1}
-            if(m==0){
+            if(m==0&&s<30){
                 document.getElementById("timer").style.color = "red";
             }
-            if(m<5&&m>0){
-                document.getElementById("timer").style.color = "yellow";
+            if(m<5&&m>=2){
+                document.getElementById("timer").style.color = "green";
             }
-
-
-            if(m<0){alert('timer completed')
+            if(m<2&&m>=1)
+                {
+                    document.getElementById("timer").style.color = "yellow";
+                }
+            if(m==0&&s>=30)
+                {
+                    document.getElementById("timer").style.color = "orange";
+                }
+            
+            if(m<0){alert('Timer Completed')
             presentTime="00:00";
-                    blink();
                     return;
-
                    }
-            if(m==0 && s==10)
+            if(m==0 && s<=10)
             {
-                blink();
-
+                getData_callback({value:1});
             }
-            if(m==0 && s<10)
-            {
-                clearInterval(ta);
-
-            }
-
+            
             document.getElementById('timer').innerHTML =
                 m + ":" + s;
-
-
             t=setTimeout(startTimer, 1000);
-
-
         }
+        
         document.getElementById('timer').addEventListener("click",function(){
             if(k)
             {
                 clearTimeout(t);
                 k=0;
-
-                document.getElementById("timer").style.color = "green";
-
+                //document.getElementById("timer").style.color = "green";
             }
             else
-            {startTimer();
-             if(m>0)
-                 document.getElementById("timer").style.color = "yellow";
-             else
-                 document.getElementById("timer").style.color = "red";
+            {
+                startTimer();
+//             if(m>0)
+//                 document.getElementById("timer").style.color = "yellow";
+//             else
+//                 document.getElementById("timer").style.color = "red";
             }
         });  
-        document.getElementById('timer').addEventListener("dblclick", function()
-                                                          {
-            document.getElementById('timer').innerHTML =
-                05+ ":" + 00;
-
-        });
-
+        
+        function reset() 
+        {
+                document.getElementById('timer').innerHTML =
+                05+ ":" + 0+0;
+        }
+        
+        document.getElementById('timer').addEventListener("dblclick", reset);
+        
         function checkSecond(sec) {
             if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
             if (sec < 0) {sec = "59"};
             return sec;
         }
-
     </script>
 </html>

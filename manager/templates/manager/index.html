@@ -1,0 +1,44 @@
+{% load static %}
+{% if user.is_authenticated %}
+
+<h2>
+    Hello {{ usrname }}!
+</h2>
+<li>
+    <form action="{% url 'logout' %}" class="user_logout" method="Get">
+    {% csrf_token %}
+        <input type="submit" value="Log out">
+    </form>
+</li>
+<li>
+    <form action="{% url 'manager:addtalk' %}" method="Get">
+    {% csrf_token %}
+        <input type="submit" value="Add Your Lightning Talk">
+    </form>
+</li>
+{% else %}
+<li>
+    <form action="{% url 'login' %}" class="user_login" method="Get">
+    {% csrf_token %}
+        <input type="submit" value="Log In">
+    </form>
+</li>
+<li>
+    <form action="{% url 'manager:signup' %}" class="user_signup" method="Get">
+    {% csrf_token %}
+        <input type="submit" value="Sign Up">
+    </form>
+</li>
+{% endif %}
+
+
+<h3>Current Talks</h3>
+<ul>
+{% for talk in all_talks %}
+    {% if flag %}
+    <li>{{ talk }}</li>
+    {% else %}
+    <li>{{ talk.description }}</li>
+    {% endif %}
+{% endfor %}
+</ul>

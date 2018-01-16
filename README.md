@@ -1,15 +1,18 @@
 # Run the basic skeleton locally with django 1.11
 * clone the repo
+* recommend setting up a virtualenv and then run
+```
+python3 pip install -r requirements.txt
+```
 * make a local db by running
 ```
-python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 * start the server with
 ```
 python3 manage.py runserver
 ```
-* go to the link the development server is running on
+* go to http://localhost:8000/manager/
 * test it
 
 # lightningpro
